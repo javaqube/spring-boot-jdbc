@@ -20,8 +20,10 @@ public class CommentRepository {
     public List<Comments> findTop(int n) {
         List<Comments> result = jdbcTemplate.query(
                 " SELECT * FROM t_weibo_and_comment\n" +
-                        "        where reviewed is null or confirmed is null\n" +
-                        "        order by comment_id desc, confirmed desc LIMIT " + n,
+                        "  where reviewed is null or confirmed is null\n" +
+                        "  or (review_result=1 and confirm_result=0 and mediated is NULL)\n" +
+                        "  or (review_result=0 and confirm_result=1 and mediated is NULL)\n"+
+                        "  order by comment_id desc, confirmed desc LIMIT " + n,
                 (rs, rowNum) -> {
                     Comments comment = new Comments();
                     comment.setId(rs.getString("comment_id"));
@@ -48,15 +50,17 @@ public class CommentRepository {
         List<Object[]> argList = new ArrayList<>();
         for (Comments c : list) {
             argList.add(new Object[]{
-                    c.getReviewed(), c.getReviewIp(), c.getReviewTime(),
-                    c.getReviewResult(), c.getConfirmed(), c.getConfirmIp(),
-                    c.getConfirmTime(), c.getConfirmResult(), c.getId()
+                    c.getReviewed(), c.getReviewIp(), c.getReviewTime(), c.getReviewResult(),
+                    c.getConfirmed(), c.getConfirmIp(),c.getConfirmTime(), c.getConfirmResult(),
+                    c.getMediated(), c.getMediateIp(),c.getMediateTime(), c.getMediateResult(),
+                    c.getId()
             });
         }
 
         String sql="update t_weibo_and_comment \n" +
                 "set reviewed=?,review_ip=?,review_time=?, review_result=?,\n" +
-                "confirmed=?,confirm_ip=?,confirm_time=?,confirm_result=? \n" +
+                "confirmed=?,confirm_ip=?,confirm_time=?,confirm_result=?,\n" +
+                "mediated=?,mediate_ip=?,mediate_time=?,mediate_result=? \n" +
                 "where comment_id=?";
 
         jdbcTemplate.batchUpdate(sql, argList);

@@ -2,64 +2,62 @@ package com.cffex.entity;
 
 import java.io.Serializable;
 
-//@Entity
-//@Table(name = "t_weibo_and_comment")
 public class Comments implements Serializable {
 
-    //    @Id
-//    @Column(name = "comment_id")
     private String id;
-
-//    @Column(name = "comment_create_time")
-
     private String createTime;
-
-    //    @Column(name = "comment_user")
     private String user;
-
-
-    //    @Column(name = "comment_cont")
     private String commentCont;
-
-    //    @Column(name = "comment_uid")
     private String uid;
-
-    //    @Column(name = "weibo_id")
     private String weiboId;
-
-
-    //    @Column(name = "weibo_cont")
     private String weiboCont;
-
-    //    @Column(name = "weibo_create_time")
     private String weiboCreateTime;
-
-    //    @Column(name = "review_ip")
     private String reviewIp;
-
-    //    @Column(name = "review_result")
     private String reviewResult;
-
-    //    @Column(name = "reviewed")
     private String reviewed;
-
-    //    @Column(name = "review_time")
     private String reviewTime;
-
-    //    @Column(name = "confirm_ip")
     private String confirmIp;
-
-    //    @Column(name = "confirm_result")
     private String confirmResult;
-
-    //    @Column(name = "confirmed")
     private String confirmed;
-
-    //    @Column(name = "confirm_time")
     private String confirmTime;
-
-    //    @Column(name = "flag")
     private String flag;
+
+    private String mediated;
+    private String mediateIp;
+    private String mediateResult;
+    private String mediateTime;
+
+    public String getMediated() {
+        return mediated;
+    }
+
+    public void setMediated(String mediated) {
+        this.mediated = mediated;
+    }
+
+    public String getMediateIp() {
+        return mediateIp;
+    }
+
+    public void setMediateIp(String mediateIp) {
+        this.mediateIp = mediateIp;
+    }
+
+    public String getMediateResult() {
+        return mediateResult;
+    }
+
+    public void setMediateResult(String mediateResult) {
+        this.mediateResult = mediateResult;
+    }
+
+    public String getMediateTime() {
+        return mediateTime;
+    }
+
+    public void setMediateTime(String mediateTime) {
+        this.mediateTime = mediateTime;
+    }
 
     public String getFlag() {
         return flag;

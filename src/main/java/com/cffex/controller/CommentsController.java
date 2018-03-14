@@ -57,25 +57,6 @@ public class CommentsController {
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,produces="application/json;charset=UTF-8")
     public String submitReview(@RequestBody ReviewVo data, HttpServletRequest request) {
 
-        /*
-         *  @api {PUT} /api/persons/detail/:id  update person info
-         *  @apiName PutPersonDetails
-         *  @apiGroup Info Manage
-         *  @apiVersion 1.0.0
-         *
-         *  @apiParam {String} phone
-         *  @apiParam {String} zone
-         *
-         *  @apiSuccess {String} create_datetime
-         *  @apiSuccess {String} email
-         *  @apiSuccess {String} id
-         *  @apiSuccess {String} phone
-         *  @apiSuccess {String} sex
-         *  @apiSuccess {String} username
-         *  @apiSuccess {String} zone
-
-        */
-
         logger.info("client ip is :{}",request.getRemoteHost());
 
         System.out.println("client ip is :"+request.getRemoteHost());
@@ -110,6 +91,15 @@ public class CommentsController {
                 comment.setConfirmIp(request.getRemoteHost());
                 //comment.setConfirmResult(comment.getConfirmResult());
                 comment.setConfirmed("1");
+                updateList.add(comment);
+            }else if("M".equals(comment.getFlag())){
+                if(comment.getMediateResult()==null || comment.getMediateResult().isEmpty()){
+                    continue;
+                }
+                comment.setMediateTime(new SimpleDateFormat("YYYY-MM-dd HH:mm:ss", Locale.CHINA).format(new Date()));
+                comment.setMediateIp(request.getRemoteHost());
+                //comment.setConfirmResult(comment.getConfirmResult());
+                comment.setMediated("1");
                 updateList.add(comment);
             }
         }

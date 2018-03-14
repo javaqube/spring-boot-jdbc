@@ -50,9 +50,13 @@
                         <input type="radio" value="1" name="result-{{$index}}" ng-model="item.reviewResult" ng-click="item.flag='R'">是
                         <input type="radio" value="0" name="result-{{$index}}" ng-model="item.reviewResult" ng-click="item.flag='R'">否
                     </div>
-                    <div ng-if="item['reviewed']==='1'">
+                    <div ng-if="item['reviewed']==='1' && item['confirmed']!=='1'">
                         <input type="radio" value="1" name="result-{{$index}}" ng-model="item.confirmResult" ng-click="item.flag='C'">是
                         <input type="radio" value="0" name="result-{{$index}}" ng-model="item.confirmResult" ng-click="item.flag='C'">否
+                    </div>
+                    <div ng-if="item['reviewed']==='1' && item['confirmed']==='1'">
+                        <input type="radio" value="1" name="result-{{$index}}" ng-model="item.mediateResult" ng-click="item.flag='M'">是
+                        <input type="radio" value="0" name="result-{{$index}}" ng-model="item.mediateResult" ng-click="item.flag='M'">否
                     </div>
                 </td>
             </tr>
