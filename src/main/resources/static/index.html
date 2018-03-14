@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Craft quick start demo</title>
+    <link rel="stylesheet" href="craft/css/craft.min.css"/>
+</head>
+<body class="no-skin skin-2">
+<script src="craft/min/craft-core.min.js"></script>
+<script src="craft/min/craft-api-rest.min.js"></script>
+<script src="scripts/app.js"></script>
+
+<div class="main-container" ng-class="container">
+
+    <div class="col-md-10 " ng-controller="DemoCtrl">
+        <table class="table table-bordered table-striped table-bordered tabel-hover dataTable no-footer">
+
+            <tr class="table-header">
+                <th align="center" class="align-center" rowspan="1">
+                    <label class="dark center">评论内容</label>
+                </th>
+                <th class="align-center" colspan="1"><label class="dark">是否有明显的侮辱谩骂文字，直接人身或组织的攻击<br>（包括不雅的称号）</label></th>
+            </tr>
+            <!--<tr>-->
+                <!--<th align="center" class="align-center">-->
+                    <!--<label class="dark center">标记</label>-->
+                <!--</th>-->
+                <!--<th align="center" class="align-center">-->
+                    <!--<label class="dark center">确认</label>-->
+                <!--</th>-->
+            <!--</tr>-->
+            <tbody>
+
+            <tr ng-repeat="item in comments " class="table-detail">
+                <td>
+                    <label class="dark left">{{item['commentCont']}}</label>
+                    <!--<textarea class="text" name="content" cols="120" rows="2">{{item['commentCont']}}</textarea>-->
+                </td>
+
+                <!--<td class="align-center" ng-switch="item.reviewResult">-->
+                    <!--<div ng-if="item['reviewed']==='1' && item.reviewResult==='1'">是</div>-->
+                    <!--<div ng-if="item['reviewed']==='1' && item.reviewResult==='0'">否</div>-->
+                    <!--<div ng-if="!item['reviewed']">-->
+                        <!--<input type="radio" value="1" name="result-{{$index}}" ng-model="item.reviewResult" ng-click="item.flag='R'">是-->
+                        <!--<input type="radio" value="0" name="result-{{$index}}" ng-model="item.reviewResult" ng-click="item.flag='R'">否-->
+                    <!--</div>-->
+                <!--</td>-->
+                <td class="align-center">
+                    <div ng-if="!item['reviewed'] || item['reviewed']!=='1'">
+                        <input type="radio" value="1" name="result-{{$index}}" ng-model="item.reviewResult" ng-click="item.flag='R'">是
+                        <input type="radio" value="0" name="result-{{$index}}" ng-model="item.reviewResult" ng-click="item.flag='R'">否
+                    </div>
+                    <div ng-if="item['reviewed']==='1'">
+                        <input type="radio" value="1" name="result-{{$index}}" ng-model="item.confirmResult" ng-click="item.flag='C'">是
+                        <input type="radio" value="0" name="result-{{$index}}" ng-model="item.confirmResult" ng-click="item.flag='C'">否
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+        <br>
+        <div class="row">
+            <div class="col-md-10">
+                <textarea class="text" name="content" id="" cols="120" rows="2" ng-model="keywords" placeholder="请输入评论中关键词、谐音词、每行一词">
+                </textarea>
+                <label class="align-left">例如：641、死鱼、留死鱼、刘死鱼、刘撕鱼、臭鱼、64%1、lsy、刘太监、郭嘉、蝈嘉队、郭加、证奸会、<br>证贱会、ZJH、cnmb、748、尼嘛的个比、mmp、敲里吗、地命海心、T+0</label>
+            </div>
+            <div class="col-md-2">
+                <input type="button" ng-click="submitReview()" name="submit" value="提交" class="btn btn-md btn-info pull-right"/>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111307071-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111307071-2');
+</script>
+
+
+</body>
+</html>
